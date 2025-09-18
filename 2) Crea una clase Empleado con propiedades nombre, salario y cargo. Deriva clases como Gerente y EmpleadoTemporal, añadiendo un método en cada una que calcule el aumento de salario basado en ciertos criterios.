@@ -1,0 +1,26 @@
+class Empleado:
+    def __init__(self, nombre: str, salario: float, cargo: str):
+        self.nombre = nombre
+        self.salario = salario
+        self.cargo = cargo
+    def mostrar_info(self):
+        print(f"Nombre: {self.nombre}, Cargo: {self.cargo}, Salario: ${self.salario:.2f}")
+class Gerente(Empleado):
+    def calcular_aumento(self):
+        aumento = self.salario * 0.10  # 10% de aumento
+        self.salario += aumento
+        return f"Gerente {self.nombre} recibió un aumento de ${aumento:.2f}. Nuevo salario: ${self.salario:.2f}"
+class EmpleadoTemporal(Empleado):
+    def calcular_aumento(self):
+        aumento = 200  # aumento fijo para empleados temporales
+        self.salario += aumento
+        return f"Empleado temporal {self.nombre} recibió un aumento de ${aumento:.2f}. Nuevo salario: ${self.salario:.2f}"
+if __name__ == "__main__":
+    g = Gerente("Ana Pérez", 5000, "Gerente")
+    et = EmpleadoTemporal("Lucas Díaz", 1500, "Temporal")
+    g.mostrar_info()
+    print(g.calcular_aumento())
+    g.mostrar_info()
+    et.mostrar_info()
+    print(et.calcular_aumento())
+    et.mostrar_info()
