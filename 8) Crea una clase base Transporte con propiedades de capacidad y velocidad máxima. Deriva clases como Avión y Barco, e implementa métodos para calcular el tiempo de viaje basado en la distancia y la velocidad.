@@ -1,0 +1,28 @@
+class Transporte:
+    def __init__(self, capacidad: int, velocidad_maxima: float):
+        self.capacidad = capacidad
+        self.velocidad_maxima = velocidad_maxima
+    def calcular_tiempo_viaje(self, distancia: float):
+        if self.velocidad_maxima > 0:
+            tiempo = distancia / self.velocidad_maxima
+            return tiempo
+        else:
+            return None
+    def mostrar_info(self):
+        return f"Capacidad: {self.capacidad} personas, Velocidad máxima: {self.velocidad_maxima} km/h"
+class Avion(Transporte):
+    def calcular_tiempo_viaje(self, distancia: float):
+        tiempo = super().calcular_tiempo_viaje(distancia)
+        return f"El avión tardará {tiempo:.2f} horas en recorrer {distancia} km."
+class Barco(Transporte):
+    def calcular_tiempo_viaje(self, distancia: float):
+        tiempo = super().calcular_tiempo_viaje(distancia)
+        return f"El barco tardará {tiempo:.2f} horas en recorrer {distancia} km."
+if __name__ == "__main__":
+    avion = Avion(180, 900)
+    barco = Barco(1000, 40)
+    print(avion.mostrar_info())
+    print(avion.calcular_tiempo_viaje(1800))
+    print("-----")
+    print(barco.mostrar_info())
+    print(barco.calcular_tiempo_viaje(1800))
