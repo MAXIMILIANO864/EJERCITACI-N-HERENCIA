@@ -1,0 +1,31 @@
+class Vehiculo:
+    def __init__(self, marca: str, modelo: str, año: int):
+        self.marca = marca
+        self.modelo = modelo
+        self.año = año
+    def mostrar_info(self):
+        return f"{self.marca} {self.modelo}, Año: {self.año}"
+    def eficiencia_combustible(self):
+        pass
+    def combustible_para_viaje(self, distancia: float):
+        eficiencia = self.eficiencia_combustible()
+        if eficiencia > 0:
+            return distancia / eficiencia
+        else:
+            return None
+class Automovil(Vehiculo):
+    def eficiencia_combustible(self):
+        return 15
+class Motocicleta(Vehiculo):
+    def eficiencia_combustible(self):
+        return 25
+if __name__ == "__main__":
+    auto = Automovil("Toyota", "Corolla", 2020)
+    moto = Motocicleta("Honda", "CBR", 2022)
+    print(auto.mostrar_info())
+    print("Eficiencia:", auto.eficiencia_combustible(), "km/l")
+    print("Combustible para 300 km:", auto.combustible_para_viaje(300), "litros")
+    print("-----")
+    print(moto.mostrar_info())
+    print("Eficiencia:", moto.eficiencia_combustible(), "km/l")
+    print("Combustible para 300 km:", moto.combustible_para_viaje(300), "litros")
