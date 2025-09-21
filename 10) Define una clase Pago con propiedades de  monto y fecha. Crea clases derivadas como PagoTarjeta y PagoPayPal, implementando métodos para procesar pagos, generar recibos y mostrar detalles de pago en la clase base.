@@ -1,0 +1,33 @@
+from datetime import date
+class Pago:
+    def __init__(self, monto: float, fecha: date):
+        self.monto = monto
+        self.fecha = fecha
+    def mostrar_detalles(self):
+        return f"Pago de ${self.monto:.2f} realizado el {self.fecha}"
+class PagoTarjeta(Pago):
+    def __init__(self, monto: float, fecha: date, numero_tarjeta: str):
+        super().__init__(monto, fecha)
+        self.numero_tarjeta = numero_tarjeta
+    def procesar_pago(self):
+        return f"Procesando pago con Tarjeta terminada en {self.numero_tarjeta[-4:]} por ${self.monto:.2f}"
+    def generar_recibo(self):
+        return f"Recibo: Pago con Tarjeta - Monto: ${self.monto:.2f}, Fecha: {self.fecha}"
+class PagoPayPal(Pago):
+    def __init__(self, monto: float, fecha: date, correo: str):
+        super().__init__(monto, fecha)
+        self.correo = correo
+    def procesar_pago(self):
+        return f"Procesando pago con PayPal de la cuenta {self.correo} por ${self.monto:.2f}"
+    def generar_recibo(self):
+        return f"Recibo: Pago con PayPal - Monto: ${self.monto:.2f}, Fecha: {self.fecha}"
+if __name__ == "__main__":
+    pago1 = PagoTarjeta(150.0, date.today(), "1234567890123456")
+    pago2 = PagoPayPal(75.5, date.today(), "pepe@paypal.com")
+    print(pago1.procesar_pago())
+    print(pago1.generar_recibo())
+    print(pago1.mostrar_detalles())
+    print("-----")
+    print(pago2.procesar_pago())
+    print(pago2.generar_recibo())
+    print(pago2.mostrar_detalles())
