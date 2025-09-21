@@ -1,0 +1,44 @@
+class Tienda:
+    def __init__(self, nombre: str):
+        self.nombre = nombre
+        self.inventario = {}
+        self.total_ventas = 0.0
+    def mostrar_info(self):
+        return f"Tienda: {self.nombre}, Total de ventas: ${self.total_ventas:.2f}, Productos en stock: {len(self.inventario)}"
+    def agregar_producto(self, producto: str, precio: float):
+        self.inventario[producto] = precio
+        return f"Producto '{producto}' agregado con precio ${precio:.2f}"
+    def eliminar_producto(self, producto: str):
+        if producto in self.inventario:
+            del self.inventario[producto]
+            return f"Producto '{producto}' eliminado del inventario."
+        return f"El producto '{producto}' no existe."
+    def vender_producto(self, producto: str):
+        if producto in self.inventario:
+            precio = self.inventario[producto]
+            self.total_ventas += precio
+            return f"Producto '{producto}' vendido por ${precio:.2f}"
+        return f"El producto '{producto}' no está disponible."
+class TiendaRopa(Tienda):
+    def __init__(self, nombre: str):
+        super().__init__(nombre)
+    def mostrar_info(self):
+        return f"Tienda de Ropa - {super().mostrar_info()}"
+class TiendaElectronica(Tienda):
+    def __init__(self, nombre: str):
+        super().__init__(nombre)
+    def mostrar_info(self):
+        return f"Tienda de Electrónica - {super().mostrar_info()}"
+if __name__ == "__main__":
+    ropa = TiendaRopa("FashionStore")
+    electronica = TiendaElectronica("TechWorld")
+    print(ropa.agregar_producto("Camisa", 25.0))
+    print(ropa.agregar_producto("Pantalón", 40.0))
+    print(electronica.agregar_producto("Laptop", 1200.0))
+    print(electronica.agregar_producto("Teléfono", 800.0))
+    print(ropa.vender_producto("Camisa"))
+    print(electronica.vender_producto("Laptop"))
+    print(ropa.eliminar_producto("Pantalón"))
+    print("-----")
+    print(ropa.mostrar_info())
+    print(electronica.mostrar_info())
