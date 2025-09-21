@@ -1,0 +1,32 @@
+from datetime import date, timedelta
+class Producto:
+    def __init__(self, nombre: str, precio: float, fecha_vencimiento: date = None):
+        self.nombre = nombre
+        self.precio = precio
+        self.fecha_vencimiento = fecha_vencimiento
+    def mostrar_info(self):
+        return f"{self.nombre} - Precio: ${self.precio:.2f}"
+class ProductoAlimenticio(Producto):
+    def aplicar_descuento(self):
+        if self.fecha_vencimiento:
+            dias_restantes = (self.fecha_vencimiento - date.today()).days
+            if dias_restantes <= 5:
+                self.precio *= 0.8
+                return f"Descuento aplicado (20%). Nuevo precio: ${self.precio:.2f}"
+        return "No aplica descuento en este alimento."
+class ProductoElectronico(Producto):
+    def aplicar_descuento(self):
+        if self.precio > 1000:
+            self.precio *= 0.9
+            return f"Descuento aplicado (10%). Nuevo precio: ${self.precio:.2f}"
+        return "No aplica descuento en este electrónico."
+if __name__ == "__main__":
+    leche = ProductoAlimenticio("Leche", 100, date.today() + timedelta(days=3))
+    print(leche.mostrar_info())
+    print(leche.aplicar_descuento())
+    print(leche.mostrar_info())
+    print("-----")
+    laptop = ProductoElectronico("Laptop", 1500)
+    print(laptop.mostrar_info())
+    print(laptop.aplicar_descuento())
+    print(laptop.mostrar_info())
